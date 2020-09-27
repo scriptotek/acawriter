@@ -99,7 +99,7 @@ services:
     container_name: redis
     image: redis
     volumes:
-        - ${DATA_PATH_HOST}/redis:/data
+      - redis_data:/data
     networks:
       - app-network
       - socket-network
@@ -108,7 +108,7 @@ services:
     container_name: postgres
     image: postgres
     volumes:
-        - ${DATA_PATH_HOST}/postgres:/data
+      - postgres_data:/data
     environment:
       POSTGRES_DB: ${DB_DATABASE}
       POSTGRES_USER: ${DB_USERNAME}
@@ -162,9 +162,7 @@ networks:
     driver: bridge
 
 volumes:
-  app:
+  postgres_data:
     driver: local
-  postgres:
-    driver: local
-  redis:
+  redis_data:
     driver: local
