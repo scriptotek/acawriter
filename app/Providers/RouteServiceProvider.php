@@ -24,6 +24,9 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+        $url = $this->app['url'];
+        $url->forceRootUrl(config('app.url'));
+        $url->forceScheme('https');
     }
 
     /**
