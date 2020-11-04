@@ -47,11 +47,13 @@ COPY --chown=www:www public/index.php /var/www/public/index.php
 
 COPY --chown=www:www composer.lock composer.json /var/www/
 
+RUN sed -i "/listen =/c\listen = 9001" /usr/local/etc/php-fpm.d/zz-docker.conf
+
 RUN mkdir vendor && chown www:www vendor
 
 USER www
 
 RUN composer install --no-cache
 
-EXPOSE 9000
+EXPOSE 9001
 CMD ["php-fpm"]
