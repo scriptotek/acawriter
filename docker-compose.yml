@@ -82,12 +82,12 @@ services:
     build:
       context: .
       dockerfile: ./docker/nginx/Dockerfile
-      args:
-        network_mode: certbot
+    environment:
+      - NGINX_SITE
     volumes:
+      - certbot_conf:/etc/letsencrypt
       - ./public/css:/var/www/css
       - ./public/js:/var/www/js
-      - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
     ports:
       - "80:80"
@@ -102,7 +102,7 @@ services:
   certbot:
     image: certbot/certbot
     volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
+      - certbot_conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
 
   redis:
@@ -177,4 +177,6 @@ volumes:
   postgres_data:
     driver: local
   redis_data:
+    driver: local
+  certbot_conf:
     driver: local
