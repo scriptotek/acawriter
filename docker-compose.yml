@@ -83,7 +83,7 @@ services:
       context: .
       dockerfile: ./docker/nginx/Dockerfile
       args:
-        network_mode: bridge
+        network_mode: certbot
     volumes:
       - ./public/css:/var/www/css
       - ./public/js:/var/www/js
