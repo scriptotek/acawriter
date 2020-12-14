@@ -87,11 +87,20 @@ services:
     volumes:
       - ./public/css:/var/www/css
       - ./public/js:/var/www/js
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
     ports:
-      - "8080:80"
+      - "80:80"
+      - "443:443"
     networks:
       - app-network
       - socket-network
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
 
   redis:
     container_name: redis
