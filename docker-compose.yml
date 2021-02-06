@@ -150,6 +150,8 @@ services:
       ATHANOR_URL: ${ATHANOR_URL}
       TAP_HOSTS: ${TAP_HOSTS}
       TAP_SECRET: ${TAP_SECRET}
+    depends_on:
+      - athanor
     #ports:
     #  - '9000:9000'
     networks:
